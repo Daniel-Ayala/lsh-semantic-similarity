@@ -79,7 +79,7 @@ class TFIDF(object):
     def _get_important_radicals(self, text):
         blob = tb(text)
         scores = {radical: self._tfidf(radical, blob, self.columns_radicals)
-                  for radical in blob.words}
+                  for radical in set(blob.words)}
         median_score = np.median(list(scores.values()))
         important_radicals = list(
             filter(lambda x: x[1] >= median_score, scores.items()))
